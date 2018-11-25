@@ -1,5 +1,7 @@
 import React from 'react';
 import { Checkbox } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+
 import { getTimeWithAMPM, getDateInMonthDDYYYYFormat } from '../constants/commonUtils';
 
 class SingleTask extends React.Component {
@@ -12,9 +14,7 @@ class SingleTask extends React.Component {
     render() {
         const { task } = this.props;
         return (
-            <div
-                style={{ borderBottom: '1px solid #ddd', display: 'flex', justifyContent: 'space-between', padding: '1rem 2rem' }}
-            >
+            <div className="single-task">
                 <Checkbox
                     onChange={this.handleCheckbox}
                     checked={task.isCompleted}
@@ -29,5 +29,15 @@ class SingleTask extends React.Component {
         );
     }
 }
+
+SingleTask.propTypes = {
+    handleToggleTask: PropTypes.func,
+    task: PropTypes.object,
+};
+
+SingleTask.defaultProps = {
+    handleToggleTask: () => {},
+    task: {},
+};
 
 export default SingleTask;

@@ -29,6 +29,35 @@
   text-decoration: line-through;
 }
 
+.todo-container {
+  width: 40rem;
+  padding: 0;
+}
+
+.todo-header {
+  padding: 1rem 2rem;
+  font-size: 1.5em;
+}
+
+.todo-button-group {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
+
+.empty-message {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.single-task{
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
+
 .App-link {
   color: #61dafb;
 }

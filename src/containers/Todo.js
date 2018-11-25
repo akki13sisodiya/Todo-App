@@ -11,7 +11,7 @@ class Todo extends React.Component {
     }
 
     handleToggleTask = (event, id) => {
-        const { todo } = this.state;
+        const todo = { ...this.state.todo };
         const { tasks } = todo;
         const task = tasks.find(t => t.id === id);
         task.isCompleted = event.target.checked;
@@ -25,12 +25,11 @@ class Todo extends React.Component {
     };
 
     render() {
-        const todo = { ...this.state.todo };
         return (
             <div className="center-screen" key="handle-todo">
                 <TodoCard
                     handleToggleTask={this.handleToggleTask}
-                    todo={todo}
+                    todo={{ ...this.state.todo }}
                 />
             </div>
         )

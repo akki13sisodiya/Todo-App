@@ -1,6 +1,7 @@
 import React from 'react';
 import { Well, Button } from 'react-bootstrap';
 import deepEqual from 'deep-equal';
+import PropTypes from 'prop-types';
 
 import SingleTask from './SingleTask';
 import {sortData} from "../constants/commonUtils";
@@ -11,13 +12,18 @@ class TodoCard extends React.Component {
         this.state = {
             showIncomplete: false,
             todoData: Object.assign({}, props.todo) || {},
-            isSorted: false,
+            isSortClicked: false,
         };
     }
 
     componentWillReceiveProps(nextProps) {
         if (!deepEqual(nextProps.todo, this.props.todo)) {
-            this.setState({ todoData: nextProps.todo });
+            const { isSortClicked } = this.state;
+            const todo = Object.assign({}, nextProps.todo);
+            if (isSortClicked) {
+                todo.tasks = sortData(todo.tasks, 'date');
+            }
+            this.setState({ todoData: todo });
         }
     }
 
@@ -28,17 +34,16 @@ class TodoCard extends React.Component {
     };
 
     handleSort = () => {
-        const { todoData, isSorted } = this.state;
+        const { todoData, isSortClicked } = this.state;
         const { tasks } = todoData;
-        console.log('dskcjndksjvcndfkjvdf', this.props.todo);
         let sortedData = this.props.todo.tasks;
-        if ( !isSorted ) {
+        if ( !isSortClicked ) {
             sortedData = sortData(tasks,'date', true);
         }
         todoData.tasks = sortedData;
         this.setState({
             todoData,
-            isSorted: !isSorted,
+            isSortClicked: !isSortClicked,
         })
     };
 
@@ -51,9 +56,9 @@ class TodoCard extends React.Component {
             length = tasks.length - todoData.completedTasks;
         }
         return (
-            <Well style={{ width: '40rem', padding: '0' }}>
-                <div style={{ padding: '1rem 2rem 0 2rem', fontSize: '1.5em' }}>{length}&nbsp;Tasks</div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem 2rem' }}>
+            <Well className="todo-container">
+                <div className="todo-header">{length}&nbsp;Tasks</div>
+                <div className="todo-button-group">
                     <Button bsStyle="primary" onClick={this.handleIncompleteButton}>
                         {
                             !showIncomplete ?
@@ -66,14 +71,13 @@ class TodoCard extends React.Component {
                 <hr style={{ borderBottom: '2px solid #ddd' }} />
                 {
                     tasks.map((task, index) => (
-                        <React.Fragment key={`${task.id}-todo-task`}>
+                        <React.Fragment>
                             {
                                 ((showIncomplete && (!task.isCompleted)) ||
                                 (!showIncomplete)) &&
                                 <SingleTask
-                                    key={`${task.id}-todo-task`}
+                                    key={`${task.id}-${index}-todo-task`}
                                     task={task}
-                                    index={index}
                                     handleToggleTask={handleToggleTask}
                                 />
                             }
@@ -82,11 +86,21 @@ class TodoCard extends React.Component {
                 }
                 {
                     (length === 0) &&
-                    <div style={{  display: 'flex', justifyContent: 'center', paddingBottom: '20px' }}>No Tasks Remaining !!!</div>
+                    <div className="empty-message">No Tasks Remaining !!!</div>
                 }
             </Well>
         );
     }
 }
+
+TodoCard.propTypes = {
+    handleToggleTask: PropTypes.func,
+    todo: PropTypes.object,
+};
+
+TodoCard.defaultProps = {
+    handleToggleTask: () => {},
+    todo: {},
+};
 
 export default TodoCard;
