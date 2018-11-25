@@ -18,6 +18,17 @@
   color: white;
 }
 
+.center-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.strike-through {
+  text-decoration: line-through;
+}
+
 .App-link {
   color: #61dafb;
 }
