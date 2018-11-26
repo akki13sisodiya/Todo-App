@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+body {
+    font-size: 16px;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
@@ -30,7 +34,7 @@
 }
 
 .todo-container {
-  width: 40rem;
+  width: 38em;
   padding: 0;
 }
 
@@ -48,7 +52,7 @@
 .empty-message {
   display: flex;
   justify-content: center;
-  padding-bottom: 20px;
+  padding: 12px 0;
 }
 
 .single-task{
@@ -69,4 +73,77 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.App {
+  text-align: center;
+}
+html {
+  font-family: 'Roboto', sans-serif !important;
+}
+body {
+  font-family: 'Roboto', sans-serif !important;
+}
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5rem;
+}
+
+.App-intro {
+  font-size: large;
+}
+.flexChildren{
+  display: flex;
+  align-items: center;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+input[type=time]::-webkit-outer-spin-button,
+input[type=time]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=time] {
+  -moz-appearance:textfield;
+}
+html { font-size: 62.5%; }
+body { font-size: 14px; overflow-x: hidden;}
+
+@media (max-width: 300px) {
+  html { font-size: 70%; }
+}
+
+@media (min-width: 500px) {
+  html { font-size: 80%; }
+}
+
+@media (min-width: 700px) {
+  html { font-size: 90%; }
+}
+
+@media (min-width: 1200px) {
+  html { font-size: 100%; }
+}
+@media (min-width: 1920px) {
+  html { font-size: 100%; }
+}
+
+.error {
+  color: red;
 }

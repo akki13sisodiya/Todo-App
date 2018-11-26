@@ -12,10 +12,11 @@ export const getTimeWithAMPM = (date) => {
 };
 
 export const getDateInMonthDDYYYYFormat = (date) => {
-    if (date) {
-        return `${monthsWithThreeChar[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+    let day = date.getDate();
+    if (day < 10) {
+        day = `0${day}`;
     }
-    return '';
+    return `${monthsWithThreeChar[date.getMonth()]} ${day}, ${date.getFullYear()}`;
 };
 
 export const sortData = (data, sortCol, sortAsc = true) => {
@@ -27,4 +28,32 @@ export const sortData = (data, sortCol, sortAsc = true) => {
         return a[sortCol] < b[sortCol] ? 1 : -1;
     });
     return sortedArr;
+};
+
+export const isValidAndNonEmptyObject = (theObject) => {
+    if (
+        theObject &&
+        typeof theObject === 'object' &&
+        Object.keys(theObject).length > 0
+    ) {
+        return true;
+    }
+    return false;
+};
+
+export const persistData = (key, data) => {
+    localStorage.setItem(key, JSON.stringify(data));
+};
+
+export const getData = (key) => {
+    return JSON.parse(localStorage.getItem(key));
+};
+
+export const isDateValid = date => date instanceof Date && !Number.isNaN(date.getTime());
+
+export const getDateInYYYYMMDDHyphen = (date) => {
+    if (isDateValid(date)) {
+        return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    }
+    return null;
 };

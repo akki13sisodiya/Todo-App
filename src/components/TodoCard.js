@@ -4,7 +4,8 @@ import deepEqual from 'deep-equal';
 import PropTypes from 'prop-types';
 
 import SingleTask from './SingleTask';
-import {sortData} from "../constants/commonUtils";
+import {sortData} from '../constants/commonUtils';
+import  AddNewTask from './AddNewTask';
 
 class TodoCard extends React.Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class TodoCard extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        console.log('asdfsdff', !deepEqual(nextProps.todo, this.props.todo));
         if (!deepEqual(nextProps.todo, this.props.todo)) {
             const { isSortClicked } = this.state;
             const todo = Object.assign({}, nextProps.todo);
@@ -48,7 +50,7 @@ class TodoCard extends React.Component {
     };
 
     render() {
-        const { handleToggleTask } = this.props;
+        const { handleToggleTask, handleAdd, isAddNewClicked, taskName, handleChange, handleDeleteTask } = this.props;
         const { showIncomplete, todoData } = this.state;
         const { tasks } = todoData;
         let length = tasks.length;
@@ -67,23 +69,26 @@ class TodoCard extends React.Component {
                         }
                     </Button>
                     <Button bsStyle="success" onClick={this.handleSort}>Sort Todos</Button>
+                    <Button bsStyle="primary" onClick={handleAdd}>Add New Task</Button>
                 </div>
-                <hr style={{ borderBottom: '2px solid #ddd' }} />
+                <hr style={{ borderBottom: '2px solid #ddd', margin: '0' }} />
+                <div style={{ maxHeight: '20rem', overflow: 'auto' }}>
                 {
                     tasks.map((task, index) => (
-                        <React.Fragment>
+                        <React.Fragment  key={`${task.id}-${index}-todo-task`}>
                             {
                                 ((showIncomplete && (!task.isCompleted)) ||
                                 (!showIncomplete)) &&
                                 <SingleTask
-                                    key={`${task.id}-${index}-todo-task`}
                                     task={task}
                                     handleToggleTask={handleToggleTask}
+                                    handleDeleteTask={handleDeleteTask}
                                 />
                             }
                         </React.Fragment>
                     ))
                 }
+                </div>
                 {
                     (length === 0) &&
                     <div className="empty-message">No Tasks Remaining !!!</div>
@@ -96,11 +101,21 @@ class TodoCard extends React.Component {
 TodoCard.propTypes = {
     handleToggleTask: PropTypes.func,
     todo: PropTypes.object,
+    handleAdd: PropTypes.func,
+    isAddNewClicked: PropTypes.bool,
+    handleChange: PropTypes.func,
+    handleDeleteTask: PropTypes.func,
+    taskName: PropTypes.string,
 };
 
 TodoCard.defaultProps = {
     handleToggleTask: () => {},
     todo: {},
+    handleAdd: {},
+    isAddNewClicked: false,
+    taskName: '',
+    handleChange: () => {},
+    handleDeleteTask: () => {},
 };
 
 export default TodoCard;
