@@ -45,8 +45,8 @@ class AddNewTask extends React.Component {
     };
 
     render() {
-        const { value, date } = this.state;
-        const { onCancel, onSave, classes } = this.props;
+        const { value } = this.state;
+        const { onCancel, classes } = this.props;
         const helperText = (!!value) ? '' : <span className="error">*Required Field</span>;
         console.log('sdafsdfsdafsdaf', helperText, !!value, value.length);
         return (

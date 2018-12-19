@@ -1,10 +1,10 @@
 import React from 'react';
 import todoState from '../constants/initialState';
 import TodoCard from '../components/TodoCard';
-import AddNewTask from "../components/AddNewTask";
+import AddNewTask from '../components/AddNewTask';
 import uuid from 'uuid/v4';
-import {getData, isValidAndNonEmptyObject, persistData} from "../constants/commonUtils";
-import {localKeys} from "../constants/constants";
+import { getData, isValidAndNonEmptyObject, persistData } from '../constants/commonUtils';
+import { localKeys } from '../constants/constants';
 
 class Todo extends React.Component {
     constructor(props) {

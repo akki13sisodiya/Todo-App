@@ -5,7 +5,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { withStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import { getTimeWithAMPM, getDateInMonthDDYYYYFormat } from '../constants/commonUtils';
+import { getDateInMonthDDYYYYFormat } from '../constants/commonUtils';
 
 const styles = () => ({
     lightTooltip: {

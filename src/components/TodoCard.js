@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 import SingleTask from './SingleTask';
 import {sortData} from '../constants/commonUtils';
-import  AddNewTask from './AddNewTask';
 
 class TodoCard extends React.Component {
     constructor(props) {
@@ -50,7 +49,7 @@ class TodoCard extends React.Component {
     };
 
     render() {
-        const { handleToggleTask, handleAdd, isAddNewClicked, taskName, handleChange, handleDeleteTask } = this.props;
+        const { handleToggleTask, handleAdd, handleDeleteTask } = this.props;
         const { showIncomplete, todoData } = this.state;
         const { tasks } = todoData;
         let length = tasks.length;
